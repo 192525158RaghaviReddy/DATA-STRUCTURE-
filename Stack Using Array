@@ -1,29 +1,53 @@
-#include <stdio.h>
 
-struct Student
-{
-    int roll;
-    char name[30];
-    float marks;
-};
+#include <stdio.h>
+#define MAX 5
+
+int stack[MAX], top = -1;
 
 int main()
 {
-    struct Student s;
+    int ch, x, i;
 
-    printf("Enter Roll Number: ");
-    scanf("%d", &s.roll);
+    while (1)
+    {
+        printf("\n1.Push 2.Pop 3.Display 4.Exit\n");
+        scanf("%d", &ch);
 
-    printf("Enter Name: ");
-    scanf("%s", s.name);
+        switch (ch)
+        {
+            case 1:
+                if (top == MAX - 1)
+                    printf("Stack Overflow\n");
+                else
+                {
+                    scanf("%d", &x);
+                    stack[++top] = x;
+                }
+                break;
 
-    printf("Enter Marks: ");
-    scanf("%f", &s.marks);
+            case 2:
+                if (top == -1)
+                    printf("Stack Underflow\n");
+                else
+                    printf("Deleted: %d\n", stack[top--]);
+                break;
 
-    printf("\nStudent Details\n");
-    printf("Roll Number: %d\n", s.roll);
-    printf("Name: %s\n", s.name);
-    printf("Marks: %.2f\n", s.marks);
+            case 3:
+                if (top == -1)
+                    printf("Stack is Empty\n");
+                else
+                {
+                    for (i = top; i >= 0; i--)
+                        printf("%d ", stack[i]);
+                    printf("\n");
+                }
+                break;
 
-    return 0;
+            case 4:
+                return 0;
+
+            default:
+                printf("Invalid Choice\n");
+        }
+    }
 }
